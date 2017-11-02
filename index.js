@@ -7,16 +7,15 @@ const plugin = require('ilp-plugin')()
 const ilp = new Ilp({ plugin })
 const app = new Koa()
 
-const creds = require('./creds.json')
 const twitter = new twit(JSON.parse(process.env.TWITTIUS_CREDENTIALS))
 
 router.post('/tweet', ilp.paid({ price: 10000 }), async ctx => {
   const { status } = ctx.request.body
 
   await new Promise((resolve, reject) => {
-    twitter.post('statuses', { status }, (err, data, response) => {
+    twitter.post('statuses/update', { status }, (err, data, response) => {
       if (err) reject(err)
-      resolve(response)
+      resolve()
     })
   })
 
