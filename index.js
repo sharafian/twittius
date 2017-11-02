@@ -8,7 +8,7 @@ const ilp = new Ilp({ plugin })
 const app = new Koa()
 
 const creds = require('./creds.json')
-const twitter = new twit(creds)
+const twitter = new twit(JSON.parse(process.env.TWITTIUS_CREDENTIALS))
 
 router.post('/tweet', ilp.paid({ price: 10000 }), async ctx => {
   const { status } = ctx.request.body
@@ -27,4 +27,4 @@ app
   .use(parser)
   .use(router.routes())
   .use(router.allowedMethods())
-  .listen(8080)
+  .listen(process.env.TWITTIUS_PORT)
