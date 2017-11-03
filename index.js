@@ -1,6 +1,6 @@
 const twit = require('twit')
 const Koa = require('koa')
-const router = require('router')()
+const router = require('koa-router')()
 const parser = require('koa-bodyparser')()
 const Ilp = require('koa-ilp')
 const plugin = require('ilp-plugin')()
